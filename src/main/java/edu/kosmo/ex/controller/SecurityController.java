@@ -14,34 +14,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
 
+@Log4j
 @RequestMapping("/security/*")
 @Controller
-@Log4j
 public class SecurityController {
 	
 	@GetMapping("/all")
 	public String all() {
+	
 		System.out.println("do all acess everybody");
-		
 		return "/security/all";
 	}
 	
 	
-	
 	@GetMapping("/member")
 	public String member() {
+	
 		System.out.println("logined member");
-		
 		return "/security/member";
+	}
+	
+	@GetMapping("/admin")
+	public void admin() {
+	
+		log.info("/admin..");
+		
+		//return "security/admin"
 	}
 	
 	@GetMapping("/accessError")
 	public void accessError(Model model) {
-	log.info("/accessError");
-	model.addAttribute("msg", "ACCESS Denied(403 에러)");
-
+	
+		log.info("/accessError()..");
+		
+		model.addAttribute("msg","ACCESS Denied(403 에러)");	
+		
 	}
 	
+	
+	
 }
-
-// context명+/security를 치고 들어오는 모든 것들은 아래 부분에서 처리하라는 의미
